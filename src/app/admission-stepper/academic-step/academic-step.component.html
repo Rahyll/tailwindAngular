@@ -1,0 +1,153 @@
+<div class="space-y-6" [formGroup]="form">
+  <h2 class="text-2xl font-bold text-gray-700 pt-4">Academic Details</h2>
+  <p-tabs>
+    <p-tablist>
+      <p-tab value="0">Academic</p-tab>
+      <p-tab value="1">B Pharm</p-tab>
+    </p-tablist>
+    <p-tabpanels>
+      <p-tabpanel value="0">
+        <!-- Previous Academic Qualifications -->
+        <p-button
+          label="Add Qualification"
+          icon="pi pi-plus"
+          (click)="addQualification.emit()"
+          class="text-white"
+        ></p-button>
+        <div formArrayName="academicQualifications" class="space-y-4">
+          <div
+            *ngFor="
+              let qualification of academicQualifications.controls;
+              let i = index
+            "
+            [formGroupName]="i"
+            class="p-4 rounded-lg space-y-4"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <app-errorwrapper label="Examination" id="examination">
+                <p-select
+                  [options]="exams"
+                  formControlName="examination"
+                  class="w-full"
+                ></p-select>
+              </app-errorwrapper>
+              <app-errorwrapper label="Board/University" id="board">
+                <input pInputText formControlName="board" class="w-full" />
+              </app-errorwrapper>
+              <app-errorwrapper label="Passing Date" id="passingDate">
+                <p-datepicker
+                  formControlName="passingDate"
+                  dateFormat="mm/yy"
+                  styleClass="w-full"
+                  [showIcon]="true"
+                  view="month"
+                ></p-datepicker>
+              </app-errorwrapper>
+              <app-errorwrapper label="Marks (%)" id="marks">
+                <input
+                  pInputText
+                  type="number"
+                  formControlName="marks"
+                  class="w-full"
+                />
+              </app-errorwrapper>
+              <div>
+                <p-button
+                  icon="pi pi-times"
+                  (click)="removeQualification.emit(i)"
+                  class="text-white"
+                ></p-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-tabpanel>
+      <p-tabpanel value="1">
+        <!-- B.Pharm Academic Marks -->
+        <div class="space-y-6">
+          <h3 class="text-lg font-semibold text-gray-800">
+            B.Pharm Academic Performance
+          </h3>
+          <div formArrayName="bpharmYears" class="space-y-4">
+            <div
+              *ngFor="let year of bpharmYears.controls; let i = index"
+              [formGroupName]="i"
+              class="p-4 border rounded-lg"
+            >
+              <h4 class="font-medium text-gray-700 mb-4">
+                {{ year.get("year")?.value }}
+              </h4>
+              <div
+                formArrayName="semesters"
+                class="grid grid-cols-1 md:grid-cols-2 gap-4"
+              >
+                <div
+                  *ngFor="
+                    let semester of getYearSemesters(i).controls;
+                    let j = index
+                  "
+                  [formGroupName]="j"
+                  class="space-y-2"
+                >
+                  <div class="space-y-1">
+                    <label class="block text-sm font-medium text-gray-700">
+                      Semester {{ semester.get("semester")?.value }} Marks
+                    </label>
+                    <input
+                      type="number"
+                      formControlName="marks"
+                      placeholder="Enter marks %"
+                      class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                    <small
+                      *ngIf="semester.get('marks')?.errors"
+                      class="text-red-600 text-sm"
+                    >
+                      Valid marks (0-100) required
+                    </small>
+                  </div>
+
+                  <div class="space-y-1">
+                    <label class="block text-sm font-medium text-gray-700"
+                      >Passing Date</label
+                    >
+                    <p-datepicker
+                      formControlName="passingDate"
+                      [showIcon]="true"
+                      dateFormat="mm/yy"
+                      class="w-full [&>div]:w-full"
+                    ></p-datepicker>
+                    <small
+                      *ngIf="semester.get('passingDate')?.errors"
+                      class="text-red-600 text-sm"
+                    >
+                      Passing date required
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- MHT-CET Score -->
+        <div class="space-y-1">
+          <label class="block text-sm font-medium text-gray-700"
+            >MHT-CET Score</label
+          >
+          <input
+            pInputText
+            formControlName="mhtcetScore"
+            type="number"
+            class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+          <small
+            *ngIf="form.get('mhtcetScore')?.errors"
+            class="text-red-600 text-sm"
+          >
+            Valid score between 0-100 required
+          </small>
+        </div>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+</div>

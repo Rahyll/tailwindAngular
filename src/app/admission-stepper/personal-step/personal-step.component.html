@@ -1,0 +1,155 @@
+<div class="space-y-6">
+  <h2 class="text-2xl font-bold text-gray-800 border-b pb-2">
+    Personal Details
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4" [formGroup]="form">
+    <!-- Last Name -->
+    <div class="space-y-1">
+      <app-errorwrapper label="Last Name" id="lastName">
+        <input
+          pInputText
+          formControlName="lastName"
+          placeholder="Enter last name"
+          class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+      </app-errorwrapper>
+    </div>
+
+    <!-- First Name -->
+    <div class="space-y-1">
+      <app-errorwrapper label="First Name" id="firstName">
+        <input
+          pInputText
+          formControlName="firstName"
+          placeholder="Enter first name"
+          class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+      </app-errorwrapper>
+    </div>
+
+    <!-- Parent Name -->
+    <div class="space-y-1">
+      <app-errorwrapper label="Father/Husband's Name" id="parentName">
+        <input
+          pInputText
+          formControlName="parentName"
+          placeholder="Enter parent's name"
+          class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+      </app-errorwrapper>
+    </div>
+
+    <!-- Date of Birth -->
+    <div class="space-y-1">
+      <app-errorwrapper label="Date of Birth" id="dob">
+        <p-datepicker
+          formControlName="dob"
+          [showIcon]="true"
+          dateFormat="dd/mm/yy"
+          class="w-full [&>div]:w-full"
+        ></p-datepicker>
+      </app-errorwrapper>
+    </div>
+
+    <!-- Blood Group -->
+    <div class="space-y-1">
+      <app-errorwrapper label="Blood Group" id="bloodGroup">
+        <p-select
+          [options]="bloodGroups"
+          formControlName="bloodGroup"
+          class="w-full"
+        ></p-select>
+      </app-errorwrapper>
+    </div>
+
+    <!-- Gender -->
+    <div class="space-y-1">
+      <app-errorwrapper label="Gender" id="gender">
+        <div class="flex gap-4">
+          <div class="flex items-center">
+            <p-radioButton
+              name="gender"
+              value="Male"
+              formControlName="gender"
+            ></p-radioButton>
+            <label class="ml-2">Male</label>
+          </div>
+          <div class="flex items-center">
+            <p-radioButton
+              name="gender"
+              value="Female"
+              formControlName="gender"
+            ></p-radioButton>
+            <label class="ml-2">Female</label>
+          </div>
+        </div>
+      </app-errorwrapper>
+    </div>
+
+    <!-- PAN Number -->
+    <div class="space-y-1">
+      <app-errorwrapper label="PAN Card Number" id="panNumber">
+        <input
+          pInputText
+          formControlName="panNumber"
+          maxlength="10"
+          class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+      </app-errorwrapper>
+    </div>
+
+    <!-- Aadhar Number -->
+    <div class="space-y-1">
+      <app-errorwrapper label="Aadhar Card Number" id="aadharNumber">
+        <input
+          pInputText
+          formControlName="aadharNumber"
+          maxlength="12"
+          class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+      </app-errorwrapper>
+    </div>
+
+    <!-- Addresses -->
+    <div class="md:col-span-2 space-y-4">
+      <div class="space-y-1">
+        <app-errorwrapper label="Residential Address" id="residentialAddress">
+          <textarea
+            pTextarea
+            formControlName="residentialAddress"
+            rows="3"
+            class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          ></textarea>
+        </app-errorwrapper>
+      </div>
+
+      <div class="space-y-1">
+        <app-errorwrapper label="Permanent Address" id="permanentAddress">
+          <textarea
+            pTextarea
+            formControlName="permanentAddress"
+            rows="3"
+            class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          ></textarea>
+        </app-errorwrapper>
+      </div>
+    </div>
+
+    <!-- Category Selection -->
+    <div class="md:col-span-3 space-y-2">
+      <h3 class="text-lg font-medium text-gray-800">Category</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+        <div
+          *ngFor="let category of categories"
+          class="flex items-center space-x-2"
+        >
+          <p-checkbox
+            [binary]="true"
+            [formControlName]="category.value"
+          ></p-checkbox>
+          <label class="text-sm">{{ category.label }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
