@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject, input } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { PrimengImportsModule } from '../../primeng-import';
 
 import { Form, FormControl } from '@angular/forms';
@@ -20,7 +20,7 @@ export class DocumentsStepComponent {
   readonly studentSignature = input.required<FormControl>();
   readonly parentSignature = input.required<FormControl>();
   readonly declarationDate = input.required<FormControl>();
-  @Output() documentUrl = new EventEmitter<string>();
+  readonly documentUrl = output<string>();
 
   /** Inserted by Angular inject() migration for backwards compatibility */
   constructor(...args: unknown[]);

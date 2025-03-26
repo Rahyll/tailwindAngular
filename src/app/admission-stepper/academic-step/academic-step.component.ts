@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { PrimengImportsModule } from '../../primeng-import';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -18,8 +18,8 @@ export class AcademicStepComponent {
   readonly form = input.required<FormGroup>();
   readonly exams = input<any[]>([]);
 
-  @Output() addQualification = new EventEmitter<void>();
-  @Output() removeQualification = new EventEmitter<number>();
+  readonly addQualification = output<void>();
+  readonly removeQualification = output<number>();
   academicsData: any[] = [
     {
       examination: 'SSC',
