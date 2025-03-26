@@ -1,11 +1,12 @@
 <div class="space-y-1">
-  <label
-    *ngIf="label"
-    class="block text-sm font-medium text-gray-700"
-    [for]="id"
-  >
-    {{ label }}
-  </label>
+  @if (label) {
+    <label
+      class="block text-sm font-medium text-gray-700"
+      [for]="id"
+      >
+      {{ label }}
+    </label>
+  }
   <ng-content></ng-content>
   <small class="text-red-600 text-sm">
     {{ getErrorMessage() }}

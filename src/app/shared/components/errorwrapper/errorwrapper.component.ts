@@ -1,10 +1,10 @@
 import { Component, ContentChild, contentChild, Input } from '@angular/core';
 import { Form, FormControl, NgControl } from '@angular/forms';
 import { MessageModule } from 'primeng/message';
-import { NgIf } from '@angular/common';
+
 @Component({
   selector: 'app-errorwrapper',
-  imports: [MessageModule, NgIf],
+  imports: [MessageModule],
   templateUrl: './errorwrapper.component.html',
   styleUrl: './errorwrapper.component.scss',
 })

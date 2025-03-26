@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PrimengImportsModule } from '../../primeng-import';
-import { NgIf, NgFor } from '@angular/common';
+
 import { Form, FormControl } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { AdmissionService } from '../../admission.service';
 @Component({
   selector: 'app-documents-step',
-  imports: [PrimengImportsModule, NgIf, NgFor],
+  imports: [PrimengImportsModule],
   templateUrl: './documents-step.component.html',
   styleUrl: './documents-step.component.scss',
   providers: [MessageService],

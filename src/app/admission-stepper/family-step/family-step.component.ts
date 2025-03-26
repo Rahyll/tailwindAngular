@@ -2,10 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PrimengImportsModule } from '../../primeng-import';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgIf, NgFor } from '@angular/common';
+
 @Component({
   selector: 'app-family-step',
-  imports: [PrimengImportsModule, NgIf, NgFor, ReactiveFormsModule],
+  imports: [PrimengImportsModule, ReactiveFormsModule],
   templateUrl: './family-step.component.html',
   styleUrl: './family-step.component.scss',
 })

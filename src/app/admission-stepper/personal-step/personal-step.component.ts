@@ -1,16 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { PrimengImportsModule } from '../../primeng-import';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
+
 import { ErrorwrapperComponent } from '../../shared/components/errorwrapper/errorwrapper.component';
 @Component({
   selector: 'app-personal-step',
   imports: [
     PrimengImportsModule,
     ReactiveFormsModule,
-    NgFor,
-    ErrorwrapperComponent,
-  ],
+    ErrorwrapperComponent
+],
   templateUrl: './personal-step.component.html',
   styleUrl: './personal-step.component.scss',
 })
