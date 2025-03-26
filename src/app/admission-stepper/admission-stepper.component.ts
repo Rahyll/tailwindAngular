@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { PrimengImportsModule } from '../primeng-import';
 import {
@@ -49,6 +49,11 @@ interface SemesterForm {
   providers: [MessageService, DatePipe],
 })
 export class AdmissionStepperComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private datePipe = inject(DatePipe);
+  private messageService = inject(MessageService);
+  private admissionService = inject(AdmissionService);
+
   currentStep = 1;
   items = [
     { label: 'Personal', stepValue: 1 },
@@ -111,12 +116,10 @@ export class AdmissionStepperComponent implements OnInit {
   confirmationData: any[] = [];
   isSubmitting = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private datePipe: DatePipe,
-    private messageService: MessageService,
-    private admissionService: AdmissionService
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.initializeForm();

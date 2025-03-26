@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../environments/environment';
 
@@ -7,9 +7,14 @@ import { environment } from '../environments/environment';
   providedIn: 'root',
 })
 export class AdmissionService {
+  private http = inject(HttpClient);
+
   private apiUrl = `${environment.apiBaseUrl}/applications`;
 
-  constructor(private http: HttpClient) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   /**
    * Submit new admission application

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { PrimengImportsModule } from '../../primeng-import';
 
 import { Form, FormControl } from '@angular/forms';
@@ -12,6 +12,9 @@ import { AdmissionService } from '../../admission.service';
   providers: [MessageService],
 })
 export class DocumentsStepComponent {
+  private admissionService = inject(AdmissionService);
+  private messageService = inject(MessageService);
+
   @Input() documents: any[] = [];
   @Input() agreeTerms!: FormControl;
   @Input() studentSignature!: FormControl;
@@ -19,10 +22,10 @@ export class DocumentsStepComponent {
   @Input() declarationDate!: FormControl;
   @Output() documentUrl = new EventEmitter<string>();
 
-  constructor(
-    private admissionService: AdmissionService,
-    private messageService: MessageService
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   onDocumentSelect(event: any, docName: string): void {
     if (event.files.length > 0) {
