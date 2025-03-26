@@ -1,100 +1,171 @@
-<div class="max-w-4xl mx-auto my-8 p-8 bg-white rounded-lg shadow-lg">
-  <p-steps [model]="items" [readonly]="false" class="mb-8"></p-steps>
-
-  <p-dialog
-    header="Confirm Submission"
-    [(visible)]="showConfirmation"
-    [style]="{ width: '50vw' }"
-  >
-    <div class="p-4 space-y-4">
-      <h3 class="text-lg font-semibold">Please confirm your details:</h3>
-      <div
-        *ngFor="let field of confirmationData"
-        class="flex justify-between border-b pb-2"
-      >
-        <span class="font-medium">{{ field.label }}:</span>
-        <span>{{ field.value }}</span>
-      </div>
-    </div>
-    <ng-template pTemplate="footer">
-      <div class="flex justify-end gap-2">
-        <p-button
-          label="Cancel"
-          icon="pi pi-times"
-          (click)="showConfirmation = false"
-          class="bg-gray-500 hover:bg-gray-600 text-white"
-        ></p-button>
-        <p-button
-          label="Confirm"
-          icon="pi pi-check"
-          (click)="submitForm()"
-          class="bg-blue-600 hover:bg-blue-700 text-white"
-        ></p-button>
-      </div>
-    </ng-template>
-  </p-dialog>
-
+<div
+  class="max-w-4xl mx-auto my-8 p-8 bg-white rounded-lg shadow-lg flex flex-col gap-8"
+>
   <form
     [formGroup]="admissionForm"
     (ngSubmit)="showConfirmation = true"
     class="space-y-8"
   >
-    <!-- Step 1: Personal Details -->
-    <app-personal-step
-      *ngIf="currentStep === 0"
-      [form]="personalDetailsGroup"
-      [categories]="categories"
-      [bloodGroups]="bloodGroups"
-    >
-    </app-personal-step>
-
-    <!-- Step 2: Academic Details -->
-    <app-academic-step
-      *ngIf="currentStep === 1"
-      [form]="academicDetails"
-      [exams]="exams"
-      (addQualification)="addQualification()"
-      (removeQualification)="removeQualification($event)"
-    >
-    </app-academic-step>
-
-    <!-- Step 3: Family Details -->
-    <app-family-step *ngIf="currentStep === 2"> </app-family-step>
-
-    <!-- Step 4: Documents & Declaration -->
-    <app-documents-step *ngIf="currentStep === 3"> </app-documents-step>
-
-    <!-- Navigation Controls -->
-    <div
-      class="flex justify-between items-center pt-6 mt-6 border-t border-gray-200"
-    >
-      <p-button
-        *ngIf="currentStep > 0"
-        label="Previous"
-        icon="pi pi-arrow-left"
-        (click)="previousStep()"
-        class="text-white"
-      ></p-button>
-      <p-button
-        *ngIf="currentStep < items.length - 1"
-        label="Next"
-        icon="pi pi-arrow-right"
-        iconPos="right"
-        (click)="nextStep()"
-        class="text-white"
-      ></p-button>
-      <p-button
-        *ngIf="currentStep === items.length - 1"
-        label="Submit"
-        type="submit"
-        icon="pi pi-check"
-        [disabled]="!admissionForm.valid || isSubmitting"
-        class="bg-green-600 hover:bg-green-700 text-white"
-      >
-        <span *ngIf="isSubmitting" class="ml-2">
-          <i class="pi pi-spinner pi-spin"></i>
-        </span>
-      </p-button>
-    </div>
+    <p-stepper [(value)]="currentStep">
+      <p-step-list>
+        @for (item of items; track $index) {
+        <p-step [value]="item.stepValue">{{ item.label }}</p-step>
+        }
+      </p-step-list>
+      <p-step-panels>
+        <!-- Step 1: Personal Details -->
+        <p-step-panel [value]="1">
+          <ng-template #content let-activateCallback="activateCallback">
+            <app-personal-step
+              [form]="personalDetailsGroup"
+              [categories]="categories"
+              [bloodGroups]="bloodGroups"
+            >
+            </app-personal-step>
+            <div class="flex justify-between items-center pt-6 mt-6">
+              <p-button
+                label="Next"
+                icon="pi pi-arrow-right"
+                iconPos="right"
+                (click)="activateCallback(2)"
+                class="text-white"
+              ></p-button>
+            </div>
+          </ng-template>
+        </p-step-panel>
+        <!-- Step 2: Academic Details -->
+        <p-step-panel [value]="2">
+          <ng-template #content let-activateCallback="activateCallback">
+            <app-academic-step
+              [form]="academicDetails"
+              [exams]="exams"
+              (addQualification)="addQualification()"
+              (removeQualification)="removeQualification($event)"
+            >
+            </app-academic-step>
+            <div class="flex justify-between items-center pt-6 mt-6">
+              <p-button
+                label="Previous"
+                severity="secondary"
+                variant="text"
+                icon="pi pi-arrow-left"
+                (click)="activateCallback(1)"
+                class="text-white"
+              ></p-button>
+              <p-button
+                label="Next"
+                icon="pi pi-arrow-right"
+                iconPos="right"
+                (click)="activateCallback(3)"
+                class="text-white"
+              ></p-button>
+            </div>
+          </ng-template>
+        </p-step-panel>
+        <!-- Step 3: Family Details -->
+        <p-step-panel [value]="3">
+          <ng-template #content let-activateCallback="activateCallback">
+            <app-family-step> </app-family-step>
+            <div class="flex justify-between items-center pt-6 mt-6">
+              <p-button
+                label="Previous"
+                severity="secondary"
+                variant="text"
+                icon="pi pi-arrow-left"
+                (click)="activateCallback(2)"
+                class="text-white"
+              ></p-button>
+              <p-button
+                label="Next"
+                icon="pi pi-arrow-right"
+                iconPos="right"
+                (click)="activateCallback(4)"
+                class="text-white"
+              ></p-button>
+            </div>
+          </ng-template>
+        </p-step-panel>
+        <!-- Step 4: Documents & Declaration -->
+        <p-step-panel [value]="4">
+          <ng-template #content let-activateCallback="activateCallback">
+            <app-documents-step> </app-documents-step>
+            <div class="flex justify-between items-center pt-6 mt-6">
+              <p-button
+                label="Previous"
+                severity="secondary"
+                variant="text"
+                icon="pi pi-arrow-left"
+                (click)="activateCallback(3)"
+                class="text-white"
+              ></p-button>
+            </div>
+          </ng-template>
+        </p-step-panel>
+      </p-step-panels>
+    </p-stepper>
   </form>
+  <!-- Navigation Controls -->
+  <!-- <div class="flex justify-between items-center pt-6 mt-6">
+    <p-button
+      *ngIf="currentStep > 0"
+      label="Previous"
+      severity="secondary"
+      icon="pi pi-arrow-left"
+      (click)="previousStep()"
+      class="text-white"
+    ></p-button>
+    <p-button
+      *ngIf="currentStep < items.length - 1"
+      label="Next"
+      icon="pi pi-arrow-right"
+      iconPos="right"
+      (click)="nextStep()"
+      class="text-white"
+    ></p-button>
+    <p-button
+      *ngIf="currentStep === items.length - 1"
+      label="Submit"
+      type="submit"
+      icon="pi pi-check"
+      [disabled]="!admissionForm.valid || isSubmitting"
+      class="bg-green-600 hover:bg-green-700 text-white"
+    >
+      <span *ngIf="isSubmitting" class="ml-2">
+        <i class="pi pi-spinner pi-spin"></i>
+      </span>
+    </p-button>
+  </div> -->
 </div>
+
+<p-dialog
+  header="Confirm Submission"
+  [(visible)]="showConfirmation"
+  [style]="{ width: '50vw' }"
+>
+  <div class="p-4 space-y-4">
+    <h3 class="text-lg font-semibold">Please confirm your details:</h3>
+    <div
+      *ngFor="let field of confirmationData"
+      class="flex justify-between border-b pb-2"
+    >
+      <span class="font-medium">{{ field.label }}:</span>
+      <span>{{ field.value }}</span>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="flex justify-end gap-2">
+      <p-button
+        label="Cancel"
+        icon="pi pi-times"
+        (click)="showConfirmation = false"
+        class="bg-gray-500 hover:bg-gray-600 text-white"
+      ></p-button>
+      <p-button
+        label="Confirm"
+        icon="pi pi-check"
+        (click)="submitForm()"
+        class="bg-blue-600 hover:bg-blue-700 text-white"
+      ></p-button>
+    </div>
+  </ng-template>
+</p-dialog>

@@ -19,8 +19,30 @@ import { ErrorwrapperComponent } from '../../shared/components/errorwrapper/erro
 export class AcademicStepComponent {
   @Input() form!: FormGroup;
   @Input() exams: any[] = [];
+
   @Output() addQualification = new EventEmitter<void>();
   @Output() removeQualification = new EventEmitter<number>();
+  academicsData: any[] = [
+    {
+      examination: 'SSC',
+      board: 'Maharashtra State Board',
+      passingDate: 'Mar 2015', // Month and Year
+      marks: 75, // Percentage marks
+    },
+    {
+      examination: 'HSC',
+      board: 'UP Board',
+      passingDate: 'May 2017',
+      marks: 82,
+    },
+    {
+      examination: 'Diploma',
+      board: 'Maharashtra State Board',
+      passingDate: 'Jun 2019',
+      marks: 88,
+    },
+  ];
+  value: number = 0;
 
   ngOnInit() {}
 

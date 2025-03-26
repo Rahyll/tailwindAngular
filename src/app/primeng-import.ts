@@ -1,8 +1,10 @@
 import { CheckboxModule } from 'primeng/checkbox';
 import { DialogModule } from 'primeng/dialog';
+import { TableModule } from 'primeng/table';
 import { StepsModule } from 'primeng/steps';
 import { InputTextModule } from 'primeng/inputtext';
 import { DatePickerModule } from 'primeng/datepicker';
+import { StepperModule } from 'primeng/stepper';
 import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -23,6 +25,8 @@ import { NgModule } from '@angular/core';
     RadioButtonModule,
     StepsModule,
     TabsModule,
+    TableModule,
+    StepperModule,
   ],
   exports: [
     DatePickerModule,
@@ -36,6 +40,8 @@ import { NgModule } from '@angular/core';
     RadioButtonModule,
     StepsModule,
     TabsModule,
+    TableModule,
+    StepperModule,
   ],
   providers: [],
 })

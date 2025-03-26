@@ -36,7 +36,7 @@ interface SemesterForm {
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    NgIf,
+    // NgIf,
     NgFor,
     PrimengImportsModule,
     PersonalStepComponent,
@@ -49,12 +49,12 @@ interface SemesterForm {
   providers: [MessageService, DatePipe],
 })
 export class AdmissionStepperComponent implements OnInit {
-  currentStep = 0;
+  currentStep = 1;
   items = [
-    { label: 'Personal' },
-    { label: 'Academic' },
-    { label: 'Family' },
-    { label: 'Documents' },
+    { label: 'Personal', stepValue: 1 },
+    { label: 'Academic', stepValue: 2 },
+    { label: 'Family', stepValue: 3 },
+    { label: 'Documents', stepValue: 4 },
   ];
 
   // Form Data Options

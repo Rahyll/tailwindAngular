@@ -1,7 +1,7 @@
 <div class="space-y-6">
-  <h2 class="text-2xl font-bold text-gray-800 border-b pb-2">
+  <!-- <h2 class="text-2xl font-bold text-gray-800 pt-6 text-center">
     Personal Details
-  </h2>
+  </h2> -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4" [formGroup]="form">
     <!-- Last Name -->
     <div class="space-y-1">
@@ -117,7 +117,7 @@
           <textarea
             pTextarea
             formControlName="residentialAddress"
-            rows="3"
+            rows="2"
             class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           ></textarea>
         </app-errorwrapper>
@@ -128,7 +128,7 @@
           <textarea
             pTextarea
             formControlName="permanentAddress"
-            rows="3"
+            rows="2"
             class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           ></textarea>
         </app-errorwrapper>
