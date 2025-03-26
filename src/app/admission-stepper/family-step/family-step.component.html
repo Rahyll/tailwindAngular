@@ -2,154 +2,135 @@
   <h2 class="text-2xl font-bold text-gray-800 border-b pb-2">
     Family Information
   </h2>
-  <div [formGroup]="parentform" class="space-y-6">
+  <div [formGroup]="parentform()" class="space-y-6">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <!-- Father's Details -->
       <div class="space-y-1">
         <label class="block text-sm font-medium text-gray-700"
           >Father's Name</label
-          >
-          <input
-            pInputText
-            formControlName="fatherName"
-            class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          @if (parentform.get('fatherName')?.errors) {
-            <small
-              class="text-red-600 text-sm"
-              >
-              Father's name required
-            </small>
-          }
-        </div>
+        >
+        <input
+          pInputText
+          formControlName="fatherName"
+          class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+        @if (parentform().get('fatherName')?.errors) {
+        <small class="text-red-600 text-sm"> Father's name required </small>
+        }
+      </div>
 
-        <div class="space-y-1">
-          <label class="block text-sm font-medium text-gray-700"
-            >Father's Occupation</label
+      <div class="space-y-1">
+        <label class="block text-sm font-medium text-gray-700"
+          >Father's Occupation</label
+        >
+        <input
+          pInputText
+          formControlName="fatherOccupation"
+          class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+        @if (parentform().get('fatherOccupation')?.errors) {
+        <small class="text-red-600 text-sm"> Occupation required </small>
+        }
+      </div>
+
+      <div class="space-y-1">
+        <label class="block text-sm font-medium text-gray-700"
+          >Father's Income</label
+        >
+        <input
+          pInputText
+          formControlName="fatherIncome"
+          class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Mother's Details -->
+      <div class="space-y-1">
+        <label class="block text-sm font-medium text-gray-700"
+          >Mother's Name</label
+        >
+        <input
+          pInputText
+          formControlName="motherName"
+          class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+        @if (parentform().get('motherName')?.errors) {
+        <small class="text-red-600 text-sm"> Mother's name required </small>
+        }
+      </div>
+
+      <div class="space-y-1">
+        <label class="block text-sm font-medium text-gray-700"
+          >Mother's Occupation</label
+        >
+        <input
+          pInputText
+          formControlName="motherOccupation"
+          class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+        @if (parentform().get('motherOccupation')?.errors) {
+        <small class="text-red-600 text-sm"> Occupation required </small>
+        }
+      </div>
+
+      <div class="space-y-1">
+        <label class="block text-sm font-medium text-gray-700"
+          >Mother's Income</label
+        >
+        <input
+          pInputText
+          formControlName="motherIncome"
+          class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+    </div>
+  </div>
+  <!-- References -->
+  <div class="space-y-4">
+    <h3 class="text-lg font-medium text-gray-800">References</h3>
+    <div formArrayName="references" class="space-y-4">
+      @for (ref of referenceArray().controls; track ref; let i = $index) {
+      <div [formGroup]="getGroup(i)" class="p-4 border rounded-lg space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="space-y-1">
+            <label class="block text-sm font-medium text-gray-700">Name</label>
+            <input
+              pInputText
+              formControlName="name"
+              class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <div class="space-y-1">
+            <label class="block text-sm font-medium text-gray-700"
+              >Contact</label
             >
             <input
               pInputText
-              formControlName="fatherOccupation"
+              formControlName="contact"
               class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-            @if (parentform.get('fatherOccupation')?.errors) {
-              <small
-                class="text-red-600 text-sm"
-                >
-                Occupation required
-              </small>
-            }
+            />
           </div>
-
           <div class="space-y-1">
             <label class="block text-sm font-medium text-gray-700"
-              >Father's Income</label
-              >
-              <input
-                pInputText
-                formControlName="fatherIncome"
-                class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
-            </div>
+              >Profession</label
+            >
+            <input
+              pInputText
+              formControlName="profession"
+              class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
           </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Mother's Details -->
-            <div class="space-y-1">
-              <label class="block text-sm font-medium text-gray-700"
-                >Mother's Name</label
-                >
-                <input
-                  pInputText
-                  formControlName="motherName"
-                  class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  />
-                @if (parentform.get('motherName')?.errors) {
-                  <small
-                    class="text-red-600 text-sm"
-                    >
-                    Mother's name required
-                  </small>
-                }
-              </div>
-
-              <div class="space-y-1">
-                <label class="block text-sm font-medium text-gray-700"
-                  >Mother's Occupation</label
-                  >
-                  <input
-                    pInputText
-                    formControlName="motherOccupation"
-                    class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    />
-                  @if (parentform.get('motherOccupation')?.errors) {
-                    <small
-                      class="text-red-600 text-sm"
-                      >
-                      Occupation required
-                    </small>
-                  }
-                </div>
-
-                <div class="space-y-1">
-                  <label class="block text-sm font-medium text-gray-700"
-                    >Mother's Income</label
-                    >
-                    <input
-                      pInputText
-                      formControlName="motherIncome"
-                      class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                      />
-                  </div>
-                </div>
-              </div>
-              <!-- References -->
-              <div class="space-y-4">
-                <h3 class="text-lg font-medium text-gray-800">References</h3>
-                <div formArrayName="references" class="space-y-4">
-                  @for (ref of referenceForm.controls; track ref; let i = $index) {
-                    <div
-                      [formGroup]="getGroup(i)"
-                      class="p-4 border rounded-lg space-y-4"
-                      >
-                      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="space-y-1">
-                          <label class="block text-sm font-medium text-gray-700">Name</label>
-                          <input
-                            pInputText
-                            formControlName="name"
-                            class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            />
-                        </div>
-                        <div class="space-y-1">
-                          <label class="block text-sm font-medium text-gray-700"
-                            >Contact</label
-                            >
-                            <input
-                              pInputText
-                              formControlName="contact"
-                              class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                              />
-                          </div>
-                          <div class="space-y-1">
-                            <label class="block text-sm font-medium text-gray-700"
-                              >Profession</label
-                              >
-                              <input
-                                pInputText
-                                formControlName="profession"
-                                class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                />
-                            </div>
-                          </div>
-                        </div>
-                      }
-                    </div>
-                    <p-button
-                      label="Add Reference"
-                      icon="pi pi-user-plus"
-                      (click)="addReference.emit()"
-                      class="bg-blue-600 hover:bg-blue-700 text-white"
-                    ></p-button>
-                  </div>
-                </div>
+        </div>
+      </div>
+      }
+    </div>
+    <p-button
+      label="Add Reference"
+      icon="pi pi-user-plus"
+      (click)="addReference.emit()"
+      class="bg-blue-600 hover:bg-blue-700 text-white"
+    ></p-button>
+  </div>
+</div>

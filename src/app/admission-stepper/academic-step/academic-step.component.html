@@ -1,4 +1,4 @@
-<div class="space-y-6" [formGroup]="form">
+<div class="space-y-6" [formGroup]="form()">
   <!-- <h2 class="text-2xl font-bold text-gray-700 pt-6">Academic Details</h2> -->
   <p-tabs [value]="value">
     <p-tablist>
@@ -64,7 +64,7 @@
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <app-errorwrapper label="Examination" id="examination">
                   <p-select
-                    [options]="exams"
+                    [options]="exams()"
                     formControlName="examination"
                     class="w-full"
                   ></p-select>

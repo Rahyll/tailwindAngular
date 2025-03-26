@@ -3,7 +3,7 @@
     Document Upload
   </h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    @for (doc of documents; track doc) {
+    @for (doc of documents(); track doc) {
     <div class="p-4 border rounded-lg space-y-2">
       <label class="block text-sm font-medium text-gray-700">{{
         doc.label
@@ -30,7 +30,7 @@
     <h3 class="text-lg font-semibold text-gray-800">Declaration</h3>
     <div class="flex items-center space-x-2">
       <p-checkbox
-        [formControl]="agreeTerms"
+        [formControl]="agreeTerms()"
         binary="true"
         inputId="agreeTerms"
       ></p-checkbox>
@@ -39,7 +39,7 @@
         knowledge.
       </label>
     </div>
-    @if (agreeTerms.errors) {
+    @if (agreeTerms().errors) {
     <small class="text-red-600 text-sm block">
       You must agree to the declaration
     </small>
@@ -55,7 +55,7 @@
           formControlName="studentSignature"
           class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
-        @if (studentSignature.errors) {
+        @if (studentSignature().errors) {
         <small class="text-red-600 text-sm"> Signature required </small>
         }
       </div>
@@ -68,7 +68,7 @@
           formControlName="parentSignature"
           class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
-        @if (parentSignature.errors) {
+        @if (parentSignature().errors) {
         <small class="text-red-600 text-sm"> Signature required </small>
         }
       </div>
@@ -78,7 +78,7 @@
           formControlName="declarationDate"
           class="w-full [&>div]:w-full"
         ></p-datepicker>
-        @if (declarationDate.errors) {
+        @if (declarationDate().errors) {
         <small class="text-red-600 text-sm"> Date required </small>
         }
       </div>

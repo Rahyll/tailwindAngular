@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject, input } from '@angular/core';
 import { PrimengImportsModule } from '../../primeng-import';
 
 import { Form, FormControl } from '@angular/forms';
@@ -15,11 +15,11 @@ export class DocumentsStepComponent {
   private admissionService = inject(AdmissionService);
   private messageService = inject(MessageService);
 
-  @Input() documents: any[] = [];
-  @Input() agreeTerms!: FormControl;
-  @Input() studentSignature!: FormControl;
-  @Input() parentSignature!: FormControl;
-  @Input() declarationDate!: FormControl;
+  readonly documents = input<any[]>([]);
+  readonly agreeTerms = input.required<FormControl>();
+  readonly studentSignature = input.required<FormControl>();
+  readonly parentSignature = input.required<FormControl>();
+  readonly declarationDate = input.required<FormControl>();
   @Output() documentUrl = new EventEmitter<string>();
 
   /** Inserted by Angular inject() migration for backwards compatibility */

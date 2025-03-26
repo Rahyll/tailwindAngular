@@ -299,10 +299,6 @@ export class AdmissionStepperComponent implements OnInit {
     return this.admissionForm.get('parentDetails') as FormGroup;
   }
 
-  get agreeTerms() {
-    return this.admissionForm.get('agreeTerms') as FormControl;
-  }
-
   get personalDetailsGroup(): FormGroup {
     return this.admissionForm.get('personalDetails') as FormGroup;
   }
@@ -461,7 +457,7 @@ export class AdmissionStepperComponent implements OnInit {
       case 2:
         return this.parentDetails.valid && this.references.valid;
       case 3:
-        return this.validateDocuments() && this.agreeTerms.valid;
+        return this.validateDocuments() && this.agreeTermsControl.valid;
       default:
         return false;
     }

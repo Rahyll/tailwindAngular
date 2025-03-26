@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 import { PrimengImportsModule } from '../../primeng-import';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -15,8 +15,8 @@ import { ErrorwrapperComponent } from '../../shared/components/errorwrapper/erro
   styleUrl: './academic-step.component.scss',
 })
 export class AcademicStepComponent {
-  @Input() form!: FormGroup;
-  @Input() exams: any[] = [];
+  readonly form = input.required<FormGroup>();
+  readonly exams = input<any[]>([]);
 
   @Output() addQualification = new EventEmitter<void>();
   @Output() removeQualification = new EventEmitter<number>();
@@ -45,11 +45,11 @@ export class AcademicStepComponent {
   ngOnInit() {}
 
   get academicQualifications() {
-    return this.form.get('academicQualifications') as FormArray;
+    return this.form().get('academicQualifications') as FormArray;
   }
 
   get bpharmYears() {
-    return this.form.get('bpharmYears') as FormArray;
+    return this.form().get('bpharmYears') as FormArray;
   }
 
   getYearSemesters(yearIndex: number): FormArray {

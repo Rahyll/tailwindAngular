@@ -2,7 +2,7 @@
   <!-- <h2 class="text-2xl font-bold text-gray-800 pt-6 text-center">
   Personal Details
 </h2> -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4" [formGroup]="form">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4" [formGroup]="form()">
   <!-- Last Name -->
   <div class="space-y-1">
     <app-errorwrapper label="Last Name" id="lastName">
@@ -55,7 +55,7 @@
   <div class="space-y-1">
     <app-errorwrapper label="Blood Group" id="bloodGroup">
       <p-select
-        [options]="bloodGroups"
+        [options]="bloodGroups()"
         formControlName="bloodGroup"
         class="w-full"
       ></p-select>
@@ -139,7 +139,7 @@
   <div class="md:col-span-3 space-y-2">
     <h3 class="text-lg font-medium text-gray-800">Category</h3>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-      @for (category of categories; track category) {
+      @for (category of categories(); track category) {
         <div
           class="flex items-center space-x-2"
           >

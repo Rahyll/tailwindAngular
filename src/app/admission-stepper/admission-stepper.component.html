@@ -65,7 +65,11 @@
         <!-- Step 3: Family Details -->
         <p-step-panel [value]="3">
           <ng-template #content let-activateCallback="activateCallback">
-            <app-family-step> </app-family-step>
+            <app-family-step
+              [parentform]="parentDetails"
+              [referenceArray]="referencesArray"
+            >
+            </app-family-step>
             <div class="flex justify-between items-center pt-6 mt-6">
               <p-button
                 label="Previous"
@@ -88,7 +92,13 @@
         <!-- Step 4: Documents & Declaration -->
         <p-step-panel [value]="4">
           <ng-template #content let-activateCallback="activateCallback">
-            <app-documents-step> </app-documents-step>
+            <app-documents-step
+              [agreeTerms]="agreeTermsControl"
+              [studentSignature]="studentSignatureControl"
+              [parentSignature]="parentSignatureControl"
+              [declarationDate]="declarationDateControl"
+            >
+            </app-documents-step>
             <div class="flex justify-between items-center pt-6 mt-6">
               <p-button
                 label="Previous"

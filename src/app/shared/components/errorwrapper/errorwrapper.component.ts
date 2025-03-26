@@ -1,4 +1,4 @@
-import { Component, ContentChild, contentChild, Input } from '@angular/core';
+import { Component, ContentChild, contentChild, input } from '@angular/core';
 import { Form, FormControl, NgControl } from '@angular/forms';
 import { MessageModule } from 'primeng/message';
 
@@ -10,17 +10,18 @@ import { MessageModule } from 'primeng/message';
 })
 export class ErrorwrapperComponent {
   @ContentChild(NgControl) control1!: FormControl;
-  @Input() control: FormControl | null = null;
-  @Input() label: string = '';
-  @Input() id: string = '';
-  @Input() ErrorLabel: string = '';
+  readonly control = input<FormControl | null>(null);
+  readonly label = input<string>('');
+  readonly id = input<string>('');
+  readonly ErrorLabel = input<string>('');
 
   getErrorMessage(): string {
     if (!this.control1) return '';
 
+    const ErrorLabel = this.ErrorLabel();
     const errorMessages: { [key: string]: string } = {
       required: `${
-        this.ErrorLabel ? this.ErrorLabel : this.label
+        ErrorLabel ? ErrorLabel : this.label()
       } is required.`,
       underage: `Underage`,
       minlength: `Minimum length is ${
